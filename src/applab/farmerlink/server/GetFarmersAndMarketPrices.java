@@ -4,14 +4,10 @@ import applab.server.ApplabConfiguration;
 import applab.server.ApplabServlet;
 import applab.server.WebAppId;
 
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.rmi.RemoteException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.rpc.ServiceException;
 
 import com.sforce.soap.enterprise.LoginResult;
 import com.sforce.soap.enterprise.SessionHeader;
