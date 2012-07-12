@@ -2,12 +2,16 @@ package applab.farmerlink.server;
 
 import applab.server.ApplabConfiguration;
 import applab.server.ApplabServlet;
+import applab.server.ServletRequestContext;
 import applab.server.WebAppId;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import com.sforce.soap.enterprise.LoginResult;
 import com.sforce.soap.enterprise.SessionHeader;
@@ -21,6 +25,8 @@ import com.sforce.soap.schemas._class.GetFarmersAndMarketPrices.GetFarmersAndMar
  */
 public class GetFarmersAndMarketPrices extends ApplabServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String DISTRICT_TAG = "district";
+	private static final String CROP_TAG = "crop";
 
     /**
      * Default constructor. 
@@ -33,17 +39,24 @@ public class GetFarmersAndMarketPrices extends ApplabServlet {
 	 * @throws Exception 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doApplabGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		doApplabPost(request, response);
+    @Override
+	protected void doApplabGet(HttpServletRequest request, HttpServletResponse response, ServletRequestContext context ) throws Exception {
+		doApplabPost(request, response, context);
 	}
 
 	/**
 	 * @throws Exception 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doApplabPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String selectedDistrict = request.getHeader("district");
-		String selectedCrop = request.getHeader("crop");
+    @Override
+	protected void doApplabPost(HttpServletRequest request, HttpServletResponse response, ServletRequestContext context) throws Exception {
+        
+    	Document requestXml = context.getRequestBodyAsXml();
+        NodeList districtNodeList = requestXml.getElementsByTagName(DISTRICT_TAG);
+        NodeList cropNodeList = requestXml.getElementsByTagName(CROP_TAG);
+        String selectedDistrict = districtNodeList.item(0).getTextContent();
+		String selectedCrop = cropNodeList.item(0).getTextContent();
+		
 		String jsonResult = getFarmersAndMarketPricesFromSalesforce(selectedDistrict, selectedCrop);
 		PrintWriter sendResponse = response.getWriter();
 		sendResponse.println(jsonResult);
@@ -53,6 +66,9 @@ public class GetFarmersAndMarketPrices extends ApplabServlet {
 			String selectedDistrict, String selectedCrop) throws Exception {
 		GetFarmersAndMarketPricesBindingStub serviceStub = setupSalesforceAuthentication();
 		String[] farmersAndMarketPrices = serviceStub.getFarmersAndMarketPrices(selectedDistrict, selectedCrop);
+		for (String s: farmersAndMarketPrices) {
+			log("Found the following from SF: "+ s);
+		}
 		String jsonString = createJson(farmersAndMarketPrices);
 		return jsonString;
 	}

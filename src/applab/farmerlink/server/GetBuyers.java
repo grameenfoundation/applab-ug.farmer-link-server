@@ -2,6 +2,7 @@ package applab.farmerlink.server;
 
 import applab.server.ApplabConfiguration;
 import applab.server.ApplabServlet;
+import applab.server.ServletRequestContext;
 import applab.server.WebAppId;
 
 import java.io.PrintWriter;
@@ -9,6 +10,9 @@ import java.rmi.RemoteException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import com.sforce.soap.enterprise.LoginResult;
 import com.sforce.soap.enterprise.SessionHeader;
@@ -23,6 +27,8 @@ import com.sforce.soap.schemas._class.GetBuyers.GetBuyersServiceLocator;
  */
 public class GetBuyers extends ApplabServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String DISTRICT_TAG = "district";
+	private static final String CROP_TAG = "crop";
 
     /**
      * Default constructor. 
@@ -35,18 +41,27 @@ public class GetBuyers extends ApplabServlet {
 	 * @throws Exception 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doApplabGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		doApplabPost(request, response);
+    @Override
+	protected void doApplabGet(HttpServletRequest request, HttpServletResponse response, ServletRequestContext context) throws Exception {
+		doApplabPost(request, response, context);
 	}
 
 	/**
 	 * @throws Exception 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doApplabPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String selectedDistrict = request.getHeader("district");
-		String selectedCrop = request.getHeader("crop");
+    @Override
+	protected void doApplabPost(HttpServletRequest request, HttpServletResponse response, ServletRequestContext context) throws Exception {
+    	Document requestXml = context.getRequestBodyAsXml();
+        NodeList districtNodeList = requestXml.getElementsByTagName(DISTRICT_TAG);
+        NodeList cropNodeList = requestXml.getElementsByTagName(CROP_TAG);
+        String selectedDistrict = districtNodeList.item(0).getTextContent();
+		String selectedCrop = cropNodeList.item(0).getTextContent();
+		
+		log("Selected District: " + selectedDistrict);
+		log("Selected Crop: " + selectedCrop);
 		String jsonResult = getBuyersFromSalesforce(selectedDistrict, selectedCrop);
+		log("JSON Result: " + jsonResult);
 		PrintWriter sendResponse = response.getWriter();
 		sendResponse.println(jsonResult);
 	}
@@ -54,7 +69,9 @@ public class GetBuyers extends ApplabServlet {
 	private String getBuyersFromSalesforce(String selectedDistrict,
 			String selectedCrop) throws Exception {
 		GetBuyersBindingStub serviceStub = setupSalesforceAuthentication();
+		log("Getting buyers from salesforce.....");
 		String buyers = serviceStub.getBuyers(selectedDistrict, selectedCrop);
+		log("Found the following buyers...." + buyers);
 		return buyers;
 	}
 

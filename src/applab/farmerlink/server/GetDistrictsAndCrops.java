@@ -2,6 +2,7 @@ package applab.farmerlink.server;
 
 import applab.server.ApplabConfiguration;
 import applab.server.ApplabServlet;
+import applab.server.ServletRequestContext;
 import applab.server.WebAppId;
 
 import java.io.PrintWriter;
@@ -39,16 +40,18 @@ public class GetDistrictsAndCrops extends ApplabServlet {
 	 * @throws Exception 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doApplabGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @Override
+	protected void doApplabGet(HttpServletRequest request, HttpServletResponse response, ServletRequestContext context) throws Exception {
         log("Reached get method for get districts and crops");
-        doApplabPost(request, response);
+        doApplabPost(request, response, context);
 	}
 
 	/**
 	 * @throws Exception 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doApplabPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @Override
+	protected void doApplabPost(HttpServletRequest request, HttpServletResponse response, ServletRequestContext context) throws Exception {
 		log("Reached method to get the configured districts and crops");
 		String imei = request.getHeader(IMEI);
 		// Make Sales force call
