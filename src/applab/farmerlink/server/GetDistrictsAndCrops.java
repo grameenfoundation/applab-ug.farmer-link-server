@@ -1,3 +1,17 @@
+/**
+ * Copyright (C) 2012 Grameen Foundation
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package applab.farmerlink.server;
 
 import applab.server.ApplabConfiguration;
@@ -27,85 +41,89 @@ import com.sforce.soap.schemas._class.GetDistrictsAndCrops.GetDistrictsAndCropsS
  */
 public class GetDistrictsAndCrops extends ApplabServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String IMEI = "x-Imei";
-
-    /**
-     * Default constructor. 
-     */
-    public GetDistrictsAndCrops() {
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @throws Exception 
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @throws Exception
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-    @Override
-	protected void doApplabGet(HttpServletRequest request, HttpServletResponse response, ServletRequestContext context) throws Exception {
-        log("Reached get method for get districts and crops");
-        doApplabPost(request, response, context);
+	@Override
+	protected void doApplabGet(HttpServletRequest request,
+			HttpServletResponse response, ServletRequestContext context)
+			throws Exception {
+		doApplabPost(request, response, context);
 	}
 
 	/**
-	 * @throws Exception 
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @throws Exception
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-    @Override
-	protected void doApplabPost(HttpServletRequest request, HttpServletResponse response, ServletRequestContext context) throws Exception {
-		log("Reached method to get the configured districts and crops");
-		String imei = request.getHeader(IMEI);
+	@Override
+	protected void doApplabPost(HttpServletRequest request,
+			HttpServletResponse response, ServletRequestContext context)
+			throws Exception {
 		// Make Sales force call
-		String jsonResult = getDistrictsAndCropsFromSalesforce(imei);
+		String jsonResult = getDistrictsAndCropsFromSalesforce();
 		PrintWriter sendResponse = response.getWriter();
 		sendResponse.println(jsonResult);
-		log("Finished sending districts and crops");
 	}
 
-	private String getDistrictsAndCropsFromSalesforce(String imei) throws Exception {
+	private String getDistrictsAndCropsFromSalesforce() throws Exception {
 		GetDistrictsAndCropsBindingStub serviceStub = setupSalesforceAuthentication();
 		String[] districtsAndCrops = serviceStub.getDistrictsAndCrops();
 		String jsonString = createJson(districtsAndCrops);
-		//"{\"districts\": [\"Abim\", \"Pader\",\"Nwoya\",\"Kitgum\"], \"crops\":[\"Simsim\", \"Beans\",\"Bananas\",\"Maize\"]}";
 		return jsonString;
 	}
-	
-    private String createJson(String[] districtsAndCrops) {
-        StringBuffer districtsAndCropsJson = new StringBuffer();
-        districtsAndCropsJson.append("{\"districts\" : ");
-        districtsAndCropsJson.append(districtsAndCrops[0]);
-        districtsAndCropsJson.append(",\"crops\" : ");
-        districtsAndCropsJson.append(districtsAndCrops[1]);
-        districtsAndCropsJson.append("}");
+
+	private String createJson(String[] districtsAndCrops) {
+		StringBuffer districtsAndCropsJson = new StringBuffer();
+		districtsAndCropsJson.append("{\"districts\" : ");
+		districtsAndCropsJson.append(districtsAndCrops[0]);
+		districtsAndCropsJson.append(",\"crops\" : ");
+		districtsAndCropsJson.append(districtsAndCrops[1]);
+		districtsAndCropsJson.append("}");
 		return districtsAndCropsJson.toString();
 	}
 
 	/**
-     * This authenticates and sets up a service stub for webservice calls
-     * 
-     * @return GetDistrictsAndCrops service stub
-     * @throws ServiceException
-     * @throws RemoteException
-     * @throws InvalidIdFault
-     * @throws UnexpectedErrorFault
-     * @throws LoginFault
-     */
-    private GetDistrictsAndCropsBindingStub setupSalesforceAuthentication() throws Exception {
+	 * This authenticates and sets up a service stub for webservice calls
+	 * 
+	 * @return GetDistrictsAndCrops service stub
+	 * @throws ServiceException
+	 * @throws RemoteException
+	 * @throws InvalidIdFault
+	 * @throws UnexpectedErrorFault
+	 * @throws LoginFault
+	 */
+	private GetDistrictsAndCropsBindingStub setupSalesforceAuthentication()
+			throws Exception {
 
-        GetDistrictsAndCropsServiceLocator getDistrictsAndCropsServiceLocator = new GetDistrictsAndCropsServiceLocator();
-        GetDistrictsAndCropsBindingStub serviceStub = (GetDistrictsAndCropsBindingStub)getDistrictsAndCropsServiceLocator.getGetDistrictsAndCrops();
+		GetDistrictsAndCropsServiceLocator getDistrictsAndCropsServiceLocator = new GetDistrictsAndCropsServiceLocator();
+		GetDistrictsAndCropsBindingStub serviceStub = (GetDistrictsAndCropsBindingStub) getDistrictsAndCropsServiceLocator
+				.getGetDistrictsAndCrops();
 
-        // Use soap api to login and get session info
-        SforceServiceLocator soapServiceLocator = new SforceServiceLocator();
-        soapServiceLocator.setSoapEndpointAddress((String)ApplabConfiguration.getConfigParameter(WebAppId.global, "salesforceAddress", ""));
-        SoapBindingStub binding = (SoapBindingStub)soapServiceLocator.getSoap();
-        LoginResult loginResult = binding.login((String)ApplabConfiguration.getConfigParameter(WebAppId.global, "salesforceUsername", ""),
-                (String)ApplabConfiguration.getConfigParameter(WebAppId.global, "salesforcePassword", "")
-                        + (String)ApplabConfiguration.getConfigParameter(WebAppId.global, "salesforceToken", ""));
-        SessionHeader sessionHeader = new SessionHeader(loginResult.getSessionId());
+		// Use soap api to login and get session info
+		SforceServiceLocator soapServiceLocator = new SforceServiceLocator();
+		soapServiceLocator.setSoapEndpointAddress((String) ApplabConfiguration
+				.getConfigParameter(WebAppId.global, "salesforceAddress", ""));
+		SoapBindingStub binding = (SoapBindingStub) soapServiceLocator
+				.getSoap();
+		LoginResult loginResult = binding.login(
+				(String) ApplabConfiguration.getConfigParameter(
+						WebAppId.global, "salesforceUsername", ""),
+				(String) ApplabConfiguration.getConfigParameter(
+						WebAppId.global, "salesforcePassword", "")
+						+ (String) ApplabConfiguration.getConfigParameter(
+								WebAppId.global, "salesforceToken", ""));
+		SessionHeader sessionHeader = new SessionHeader(
+				loginResult.getSessionId());
 
-        // Share the session info with our webservice
-        serviceStub.setHeader("http://soap.sforce.com/schemas/class/GetDistrictsAndCrops", "SessionHeader", sessionHeader);
-        return serviceStub;
-    }
+		// Share the session info with our webservice
+		serviceStub.setHeader(
+				"http://soap.sforce.com/schemas/class/GetDistrictsAndCrops",
+				"SessionHeader", sessionHeader);
+		return serviceStub;
+	}
 
 }

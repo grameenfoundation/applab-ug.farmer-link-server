@@ -30,6 +30,10 @@
 	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/saaj.jar"/>
 	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/wsdl4j-1.5.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre6"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
