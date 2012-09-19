@@ -39,4 +39,14 @@
     <servlet-name>GetBuyers</servlet-name>
     <url-pattern>/getBuyers</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PostCompleteTransaction</display-name>
+    <servlet-name>PostCompleteTransaction</servlet-name>
+    <servlet-class>applab.farmerlink.server.PostCompleteTransaction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostCompleteTransaction</servlet-name>
+    <url-pattern>/postCompleteTransaction</url-pattern>
+  </servlet-mapping>
 </web-app>
