@@ -42,11 +42,6 @@ public class GetFarmersAndMarketPrices extends ApplabServlet {
 	private static final String DISTRICT_TAG = "district";
 	private static final String CROP_TAG = "crop";
 
-	/**
-	 * @throws Exception
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@Override
 	protected void doApplabGet(HttpServletRequest request,
 			HttpServletResponse response, ServletRequestContext context)
@@ -54,11 +49,6 @@ public class GetFarmersAndMarketPrices extends ApplabServlet {
 		doApplabPost(request, response, context);
 	}
 
-	/**
-	 * @throws Exception
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@Override
 	protected void doApplabPost(HttpServletRequest request,
 			HttpServletResponse response, ServletRequestContext context)

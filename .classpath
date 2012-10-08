@@ -8,32 +8,32 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/applab-ug.common-server"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/activation.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/axis.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/axis-ant.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/commons-codec-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/commons-discovery.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/commons-discovery-0.2.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/commons-io-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/commons-logging-1.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/httpclient-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/httpcore-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/httpmime-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/javax.wsdl_1.6.2.v201005080631.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/jaxrpc.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/log4j-1.2.8.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/mail.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/mysql-connector-java-5.1.12-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/org.apache.commons.logging_1.0.4.v201005080501.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/saaj.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/Code/Applab/applab-ug.common-server/WebContent/WEB-INF/lib/wsdl4j-1.5.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/axis-ant.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/axis.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/commons-discovery.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/httpclient-4.1.2.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/httpcore-4.1.2.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/httpmime-4.1.2.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/javax.wsdl_1.6.2.v201005080631.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/mysql-connector-java-5.1.12-bin.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/org.apache.commons.logging_1.0.4.v201005080501.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/saaj.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/Common Server/WebContent/WEB-INF/lib/wsdl4j-1.5.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Common Server"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

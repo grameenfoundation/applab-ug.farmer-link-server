@@ -70,10 +70,14 @@ public class GetDistrictsAndCrops extends ApplabServlet {
 	}
 
 	private String getDistrictsAndCropsFromSalesforce() throws Exception {
-		GetDistrictsAndCropsBindingStub serviceStub = setupSalesforceAuthentication();
+		/**
+		 * Commented out since there are limited districts and crops
+		 * TODO: make this more extensible
+		 */
+	    GetDistrictsAndCropsBindingStub serviceStub = setupSalesforceAuthentication();
 		String[] districtsAndCrops = serviceStub.getDistrictsAndCrops();
 		String jsonString = createJson(districtsAndCrops);
-		return jsonString;
+		return jsonString;    
 	}
 
 	private String createJson(String[] districtsAndCrops) {

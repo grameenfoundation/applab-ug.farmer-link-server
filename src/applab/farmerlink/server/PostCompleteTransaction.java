@@ -51,6 +51,7 @@ public class PostCompleteTransaction extends ApplabServlet {
     private final static String TOTAL_INCOME = "revenue";
     private final static String TOTAL_TRANSPORT_COST = "transportFee";
     private final static String TOTAL_TRANSACTION_FEE = "transactionFee";
+    private final static String COMPLETED = "completed";
     
     // Farmer details section
     private final static String FARMER = "farmer";
@@ -85,15 +86,15 @@ public class PostCompleteTransaction extends ApplabServlet {
             marketLinkTransaction.setImei(imei);
             
             // pick Farmer details
-            List<FarmerTransaction> fTransactions = getFarmerTransactions(requestXml); 
+            List<FarmerTransaction> fTransactions = getFarmerTransactions(requestXml);
             FarmerTransaction[] farmerTransactions = new FarmerTransaction[fTransactions.size()];
             
             // setup webservice call and make SF call
             CreateMarketLinkTransactionBindingStub stub = setupSalesforceAuthentication();
             String[] results = stub.createTransaction(marketLinkTransaction, fTransactions.toArray(farmerTransactions));
             log("Success: " + results[0]);
-            log("Error Message" + results[0]);
-            log("Message" + results[0]);
+            log("Error Message" + results[1]);
+            log("Message" + results[2]);
             out.println(results[0]);
                     
         }
@@ -144,6 +145,7 @@ public class PostCompleteTransaction extends ApplabServlet {
         NamedNodeMap attributes = transactionNode.getAttributes();
         
         transaction.setName(attributes.getNamedItem(NAME).getTextContent());
+        transaction.setCompleted(attributes.getNamedItem(COMPLETED).getTextContent() == "true" ? true : false);
         transaction.setCrop(attributes.getNamedItem(CROP).getTextContent());
         transaction.setDistrict(attributes.getNamedItem(DISTRICT).getTextContent());
         transaction.setTransactionDate(attributes.getNamedItem(DATE).getTextContent());
